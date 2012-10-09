@@ -1,0 +1,26 @@
+
+.logo {
+  width: 157px;
+  height: 34px;
+  background: url('../img/api-engine-logo_official.png');
+  display: inline-block;
+}
+
+.showseo-output {
+   width: 100%; 
+   height: 300px;
+}
+
+code {
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+body {
+  overflow-y: scroll;
+}
+
+h1 {
+  margin-left: 17px;
+margin-bottom: 16px;
+}
