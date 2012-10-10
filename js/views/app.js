@@ -12,8 +12,8 @@ define([
     el: 'body',
     initialize: function () {
       $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-        options.url = 'http://localhost:5000' + options.url;
-        //options.url = 'http://seoserver-web.herokuapp.com' + options.url;
+        //options.url = 'http://localhost:5000' + options.url;
+        options.url = 'http://seo.apiengine.io:4000' + options.url;
       });
     },
     render: function () {
