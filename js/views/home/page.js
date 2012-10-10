@@ -2,8 +2,10 @@ define([
   'jquery',
   'underscore',
   'backbone',
+  'models/user',
+  'models/session',
   'text!templates/home/page.html',
-], function($, _, Backbone, homeTemplate){
+], function($, _, Backbone, UserModel, SessionModel, homeTemplate){
   var HomePage = Backbone.View.extend({
     el: '.page',
     initialize: function () {
@@ -12,15 +14,22 @@ define([
       // make our view act recordingly when auth changes
     },
     events: {
-      'click .showseo': 'showSeo'
+      'click .register': 'register',
+      'click .btn-register': 'submitRegister'
     },
-    showSeo: function () {
-      $('.showseo-output').val('Loading...');
-      $.ajax('http://seo.apiengine.io:3000/' + window.location.pathname, {
-        success: function (res) {
-          $('.showseo-output').val(res);
+    submitRegister: function (ev) {
+      var formDetails = $('.form-register').serializeObject();
+      console.log(formDetails);
+      var userModel = new UserModel();
+      userModel.save(formDetails, {
+        success: function () {
+          console.log(arguments);
         }
       })
+      return false;
+    },
+    register: function () {
+      $("#register").modal('show')   
     },
     render: function () {
       $('title').text('Seo Server - Enable SEO for your Javascript applications')
