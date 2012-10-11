@@ -5,7 +5,7 @@ define([
   'models/user',
   'models/session',
   'text!templates/home/page.html',
-], function($, _, Backbone, UserModel, SessionModel, homeTemplate){
+], function($, _, Backbone, UserModel, Session, homeTemplate){
   var HomePage = Backbone.View.extend({
     el: '.page',
     initialize: function () {
@@ -15,7 +15,7 @@ define([
     },
     events: {
       'click .register': 'register',
-      'click .btn-register': 'submitRegister'
+      'submit .form-register': 'submitRegister'
     },
     submitRegister: function (ev) {
       var formDetails = $('.form-register').serializeObject();
@@ -23,6 +23,12 @@ define([
       var userModel = new UserModel();
       userModel.save(formDetails, {
         success: function () {
+          $('#register').on('hidden', function () {
+            Session.set('auth', true);
+            Backbone.router.navigate('sites', {trigger: true});
+          })
+          $("#register").modal('hide')   
+
           console.log(arguments);
         }
       })

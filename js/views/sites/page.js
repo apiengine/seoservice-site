@@ -11,16 +11,45 @@ define([
     el: '.page',
     initialize: function () {
       var that = this;
+
     },
     events: {
       'click .btn-site-modal': 'openModal',
       'click .btn-open-edit': 'openEditModal',
+      'click .btn-open-delete': 'openDeleteModal',
       'submit .form-addsite': 'addSite',
-      'submit .form-editsite': 'editSite'
+      'submit .form-editsite': 'editSite',
+      'click .btn-confirm-delete': 'confirmDelete',
+      'click .btn-cancel-delete': 'cancelDelete'
     },
     openModal: function (ev) {
       $("#addsite").modal('show')   
 
+      return false;
+    },
+    openDeleteModal: function (ev) {
+      var id = $(ev.currentTarget).attr('data-site-id');
+      $("#deletesite").data('id', id).modal('show');   
+      $('.btn-confirm-delete').attr('data-site-id', id);
+
+      return false;
+    },
+    confirmDelete: function (ev) {
+      var that = this;
+      var site = new Site({id: $(ev.currentTarget).attr('data-site-id')});
+      site.destroy({
+        success: function () {
+                $('#deletesite').on('hidden', function () {
+that.render();
+})
+          $("#deletesite").modal('hide')   
+          console.log('des', arguments);
+        }
+      })
+      return false;
+    },
+    cancelDelete: function(ev) {
+          $("#deletesite").modal('hide')   
       return false;
     },
     openEditModal: function (ev) {
@@ -46,8 +75,10 @@ define([
       site.save(siteDetails, {
         success: function () {
           console.log(arguments);
-          $("#addsite").modal('hide')   
-          that.render();
+            $('#addsite').on('hidden', function () {
+that.render();
+})
+          $("#addsite").modal('hide'); 
         }
       });
       return false;
@@ -60,9 +91,11 @@ define([
 
       site.save(siteDetails, {
         success: function () {
-          console.log(arguments);
+          console.log(arguments); 
+          $('#editsite').on('hidden', function () {
+that.render();
+})
           $("#editsite").modal('hide')   
-          that.render();
         }
       });
       return false;

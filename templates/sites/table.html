@@ -5,9 +5,12 @@
   <thead>
     <tr>
       <th>Domain</th>
+      <!--
       <th>Plan</th>
       <th>Unique Pages</th>
-      <th style="width: 82px;"></th>
+    -->
+      <th style="width: 54px;"></th>
+      <th style="width: 71px;"></th>
     </tr>
   </thead>
   <tbody>
@@ -15,15 +18,38 @@
 
       <tr>
         <td><%= site.get('domain') %></td>
+        <!--
         <td>Plan 1</td>
         <td>120</td>
+      -->
         <td>
-            <button data-site-id="<%= site.id %>" class="btn btn-warning btn-open-edit">Edit Site</button>
+            <button data-site-id="<%= site.id %>" class="btn btn-warning btn-open-edit">Edit</button>
+        </td>
+        <td>
+            <button data-site-id="<%= site.id %>" class="btn btn-danger btn-open-delete">Delete</button>
         </td>
       </tr>
     <% }); %>
+    <% if(sites.length === 0) { %>
+      <tr><td>You haven't added any sites yet</td><td></td><td></td></tr>
+    <% }; %> 
   </tbody>
   </table>
+
+<div id="deletesite" class="modal hide fade">
+    <div class="modal-header">
+      <a href="#" class="close">&times;</a>
+      <h3>Delete Site</h3>
+    </div>
+    <div class="modal-body">
+      <p>You are about to remove the Seo Server from responding to requests for your site.</p>
+      <p>Do you want to proceed?</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger btn-confirm-delete">Yes</button>
+      <button class="btn btn-cancel-delete secondary">No</button>
+    </div>
+</div>
 
   <div class="modal hide fade" id="addsite">
   <div class="modal-header">
@@ -33,7 +59,7 @@
   <div class="modal-body">
    <form class="form-addsite">
   <label>Domain</label>
-  <input type="text" name="site" placeholder="Email address">  
+  <input type="text" name="site" placeholder="domain.com">  
   </div>
   <div class="modal-footer">
     <button type="submit" class="btn btn-primary btn-add-site">Add Site</button>

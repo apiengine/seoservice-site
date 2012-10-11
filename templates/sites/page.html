@@ -1,9 +1,10 @@
   <h2>Sites</h2>
 
 <div class="well">
-  Some instructions go here such as point your bots at <br />
-  <code>RewriteRule /home/thomas/grill</code><br />
-  <a href="">More instructions</a>
+  Add this code to your apache .htaccess to redirect GoogleBot to Seo Server.  More extensive instructions coming soon. Post on the Google <a href="https://groups.google.com/forum/?fromgroups#!forum/seoserver">Group</a> for more help for now. <br /><br />
+  <code>RewriteEngine on<br />
+RewriteCond %{QUERY_STRING} ^_escaped_fragment_=(.*)$<br/>
+RewriteRule (.*) http://seo.apiengine.io:4000/seo/%1? [P]<br /></code><br />
 </div>
 
 <div class="site-list-container"></div>
