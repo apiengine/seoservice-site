@@ -2,9 +2,15 @@
 
 <div class="well">
   Add this code to your apache .htaccess to redirect GoogleBot to Seo Server.  More extensive instructions coming soon. Post on the Google <a href="https://groups.google.com/forum/?fromgroups#!forum/seoserver">Group</a> for more help for now. <br /><br />
+  <strong>Enable Seo Server Example</strong><br />
   <code>RewriteEngine on<br />
 RewriteCond %{QUERY_STRING} ^_escaped_fragment_=(.*)$<br/>
-RewriteRule (.*) http://seo.apiengine.io:4000/seo/%1? [P]<br /></code><br /><br /> <br />
+RewriteRule (.*) http://seo.apiengine.io:4000/seo/%1? [P]<br /></code><br /><br /> 
+  <strong>Enable Sitemap Example</strong> - <i>replace `10` with your site id found in sitemap link below</i><br />
+  <code>
+    RewriteCond $1 ^sitemap.xml<br/>
+RewriteRule ^(.*)$ http://seo.apiengine.io:4000/10/sitemap.xml [P]<br/>
+</code><br />
   Find more information <a href="http://seo.apiengine.io">here</a>.
 </div>
 
